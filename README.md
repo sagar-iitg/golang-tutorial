@@ -1,2 +1,9 @@
-# golang-tutorial
-golang
+
+
+
+```
+ $env:GOOS = "linux"  
+ go env
+
+ ```
+
