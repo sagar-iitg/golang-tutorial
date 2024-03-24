@@ -20,5 +20,16 @@ func main() {
 	println(x)
 	println(*p)
 	pointer()
+	var check int = 2
+	var ptr *int = &check
+	fmt.Println("\n------")
+	fmt.Println("------", check)
+	ptf(ptr)
+	fmt.Println("-------", check)
 
+}
+
+func ptf(a *int) {
+
+	*a = 10
 }
