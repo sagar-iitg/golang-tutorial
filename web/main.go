@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 )
 
 func main() {
@@ -15,7 +16,12 @@ func main() {
 
 func PerformGetRequest() {
 	const myUrl = "http://localhost:8000/get"
+	fmt.Println("Performing GET request to:", myUrl)
 	response, err := http.Get(myUrl)
+	fmt.Println("---------------")
+	fmt.Println(response)
+	fmt.Println("---------------")
+	fmt.Println(err)
 	if err != nil {
 		panic(err)
 	}
@@ -28,4 +34,10 @@ func PerformGetRequest() {
 	fmt.Println("Uncompressed:", response.Uncompressed)
 
 	fmt.Println(content)
+
+	var responseString strings.Builder
+	content1, _ := io.ReadAll(response.Body)
+	byteCount, _ := responseString.Write(content1)
+	fmt.Println("Byte count:", byteCount)
+	fmt.Println("Response body:", responseString.String())
 }
