@@ -4,13 +4,32 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
 func main() {
 
-	fmt.Println("Hello, World!")
-	PerformGetRequest()
+	//fmt.Println("Hello, World!")
+	//PerformGetRequest()
+	//PerformPostRequest()
+	PerformPostFormRequest()
+
+}
+
+func PerformPostRequest() {
+
+	const myUrl = "http://localhost:8000/post"
+
+	//fake json payload
+	requestBody := strings.NewReader(`{"name":"John Doe","age":25}`)
+	response, err := http.Post(myUrl, "application/json", requestBody)
+	if err != nil {
+		panic(err)
+	}
+	defer response.Body.Close()
+	content, _ := io.ReadAll(response.Body) // Declare the 'content' variable
+	fmt.Println("Response body:", string(content))
 
 }
 
@@ -40,4 +59,20 @@ func PerformGetRequest() {
 	byteCount, _ := responseString.Write(content1)
 	fmt.Println("Byte count:", byteCount)
 	fmt.Println("Response body:", responseString.String())
+}
+
+func PerformPostFormRequest() {
+	const myUrl = "http://localhost:8000/postform"
+	data := url.Values{}
+	fmt.Println(data)
+	data.Add("firstname", "John")
+	data.Add("lastname", "Doe")
+	response, err := http.PostForm(myUrl, data)
+	if err != nil {
+		panic(err)
+	}
+	defer response.Body.Close()
+	content, _ := io.ReadAll(response.Body)
+	fmt.Println("Response body:", string(content))
+
 }
