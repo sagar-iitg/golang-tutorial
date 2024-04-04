@@ -17,11 +17,12 @@ app.get('/get', (req, res) => {
 
 app.post('/post', (req, res) => {
     let myJson = req.body;      // your JSON
-	
+     console.log(myJson);
 	res.status(200).send(myJson);
 })
 
 app.post('/postform', (req, res) => {
+  console.log(req.body);
     res.status(200).send(JSON.stringify(req.body));
 })
   
