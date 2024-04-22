@@ -2,8 +2,9 @@
 
 ```
 
-logrus
-gorilla/mux
+gorilla/mux 
+github.com/go-kit/kit
+github.com/sirupsen/logrus
 
 ```
 
